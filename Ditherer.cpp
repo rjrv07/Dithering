@@ -1,0 +1,97 @@
+//
+// Created by Roelie Rossouw on 2025/11/14.
+//
+
+#include "Ditherer.h"
+
+Mat Ditherer::floydSteinberg() const {
+    Mat newImg = image->clone();
+    for (int i = 0; i < image->rows; i++) {
+        for (int j = 0; j < image->cols; j++) {
+            auto oldCol = newImg.at<Vec3b>(i, j);
+            newImg.at<Vec3b>(i, j) = palette->getNearestColor(newImg.at<Vec3b>(i, j));
+
+            Vec3f err(
+                (float) oldCol[0] - (float) newImg.at<Vec3b>(i, j)[0],
+                (float) oldCol[1] - (float) newImg.at<Vec3b>(i, j)[1],
+                (float) oldCol[2] - (float) newImg.at<Vec3b>(i, j)[2]
+            );
+
+            auto addError = [&](const int row, const int col, const float factor) {
+                for (int c = 0; c < 3; c++) {
+                    int val = newImg.at<Vec3b>(row, col)[c] + (int) (err[c] * factor);
+                    newImg.at<Vec3b>(row, col)[c] = saturate_cast<uchar>(val);
+                }
+            };
+
+            if (j + 1 < image->cols) {
+                addError(i, j + 1, 7.f / 16.f);
+            }
+            if (i + 1 < image->rows) {
+                if (j > 0) {
+                    addError(i + 1, j - 1, 3.f / 16.f);
+                }
+                addError(i + 1, j, 5.f / 16.f);
+                if (j + 1 < image->cols) {
+                    addError(i + 1, j + 1, 1.f / 16.f);
+                }
+            }
+        }
+    }
+    return newImg;
+}
+
+Mat Ditherer::beyer(const int detail) const {
+    std::vector<std::vector<int> > threshold;
+    switch (detail) {
+        case 1:
+            threshold = {
+                {0, 2},
+                {3, 1}
+            };
+            for (auto &i: threshold) {
+                for (int &j: i) {
+                    j *= 64; // M[i][j] * 256 / 4
+                    j -= 96; // max(M) = 3, 3 * 64 / 2
+                }
+            }
+            break;
+        case 2:
+            threshold = {
+                {0, 8, 2, 10},
+                {12, 4, 14, 6},
+                {3, 11, 1, 9},
+                {15, 7, 13, 5}
+            };
+            for (auto &i: threshold) {
+                for (int &j: i) {
+                    j *= 16; // M[i][j] * 256 / 16
+                    j -= 120; // max(M) = 15, 15 * 16 / 2
+                }
+            }
+            break;
+    }
+
+    Mat newImg = image->clone();
+    for (int i = 0; i < image->rows; i++) {
+        for (int j = 0; j < image->cols; j++) {
+            for (int c = 0; c < 3; c++) {
+                int val = (int) newImg.at<Vec3b>(i, j)[c] + threshold[i % (1 << detail)][j % (1 << detail)];
+                newImg.at<Vec3b>(i, j)[c] = saturate_cast<uchar>(val);
+            }
+
+            newImg.at<Vec3b>(i, j) = palette->getNearestColor(newImg.at<Vec3b>(i, j));
+        }
+    }
+    return newImg;
+}
+
+Mat Ditherer::noDither() const {
+    Mat newImg = image->clone();
+    for (int i = 0; i < image->rows; i++) {
+        for (int j = 0; j < image->cols; j++) {
+            newImg.at<Vec3b>(i, j) = palette->getNearestColor(newImg.at<Vec3b>(i, j));
+        }
+    }
+    return newImg;
+}

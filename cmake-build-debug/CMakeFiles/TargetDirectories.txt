@@ -1,0 +1,3 @@
+/Users/roelie/Developer/Dithering/cmake-build-debug/CMakeFiles/Dithering.dir
+/Users/roelie/Developer/Dithering/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/roelie/Developer/Dithering/cmake-build-debug/CMakeFiles/rebuild_cache.dir

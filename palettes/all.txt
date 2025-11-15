@@ -1,0 +1,38 @@
+Purple
+10002b,240046,3c096c,5a189a7b2cbf,9d4edd,c77dff,e0aaff
+
+Green and Brown
+582f0e,7f4f24,936639,a68a64,b6ad90,c2c5aa,a4ac86,656d4a,414833,333d29,000000
+
+Autumn
+6f1d1b,bb9457,432818,99582a,ffe6a7
+
+Mystic Waters
+031926,468189,77aca2,9dbebb,f4e9cd
+
+Black, White, Red, Blue, Green
+ff0000,00ff00,0000ff,ffffff,000000
+
+Smoky
+A29176,7A7255,19190A,252D23,8A6243
+
+Black and White
+000000,ffffff
+
+Red Select
+000000,555555,aaaaaa,ffffff,550000,aa0000,ff0000
+
+Green Select
+000000,555555,aaaaaa,ffffff,005500,00aa00,00ff00
+
+Blue Select
+000000,555555,aaaaaa,ffffff,000055,0000aa,0000ff
+
+Dune
+0C646D,16373C,414640,BC8E6D,FFD2B5,EC8F46,E17A0A,5C2A09,311511,111217
+
+6 Greys
+000000,333333,666666,999999,cccccc,ffffff
+
+4 Greys, Reds, Blues, Greens
+000000,555555,aaaaaa,ffffff,550000,aa0000,ff0000,005500,00aa00,00ff00,000055,0000aa,0000ff

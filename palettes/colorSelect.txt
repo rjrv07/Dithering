@@ -1,0 +1,11 @@
+Red Select
+000000,555555,aaaaaa,ffffff,550000,aa0000,ff0000
+
+Green Select
+000000,555555,aaaaaa,ffffff,005500,00aa00,00ff00
+
+Blue Select
+000000,555555,aaaaaa,ffffff,000055,0000aa,0000ff
+
+4 Greys, Reds, Blues, Greens
+000000,555555,aaaaaa,ffffff,550000,aa0000,ff0000,005500,00aa00,00ff00,000055,0000aa,0000ff
