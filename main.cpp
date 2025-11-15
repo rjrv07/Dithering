@@ -59,34 +59,43 @@ int main() {
 
     char choice;
 
-    std::cout << "Limited Depth? (Y/N): ";
+    std::cout << "Limited Depth? (y/n): ";
     std::cin >> choice;
-    bool LD = choice == 'Y';
-    int depth;
+    bool LD = choice == 'y';
+    int ldDepth;
     if (LD) {
         std::cout << "Depth: ";
-        std::cin >> depth;
+        std::cin >> ldDepth;
     }
 
-    std::cout << "Floyd Steinberg? (Y/N): ";
+    std::cout << "Halftone? (y/n): ";
     std::cin >> choice;
-    bool FS = choice == 'Y';
+    bool HT = choice == 'y';
+    int htDepth;
+    if (HT) {
+        std::cout << "Depth: ";
+        std::cin >> htDepth;
+    }
 
-    std::cout << "Beyer 1? (Y/N): ";
+    std::cout << "Floyd Steinberg? (y/n): ";
     std::cin >> choice;
-    bool B1 = choice == 'Y';
+    bool FS = choice == 'y';
 
-    std::cout << "Beyer 2? (Y/N): ";
+    std::cout << "Beyer 1? (y/n): ";
     std::cin >> choice;
-    bool B2 = choice == 'Y';
+    bool B1 = choice == 'y';
 
-    std::cout << "No Dithering? (Y/N): ";
+    std::cout << "Beyer 2? (y/n): ";
     std::cin >> choice;
-    bool ND = choice == 'Y';
+    bool B2 = choice == 'y';
 
-    std::cout << "Display output? (Y/N): ";
+    std::cout << "No Dithering? (y/n): ";
     std::cin >> choice;
-    bool SHOW = choice == 'Y';
+    bool ND = choice == 'y';
+
+    std::cout << "Display output? (y/n): ";
+    std::cin >> choice;
+    bool SHOW = choice == 'y';
 
     std::ifstream fin(palettePath);
     std::string line;
@@ -102,24 +111,28 @@ int main() {
 
     if (LD) {
         std::vector<Vec3b> colors;
-        for (float b = 0; b < 256; b += 255.f / (depth - 1)) {
-            for (float g = 0; g < 256; g += 255.f / (depth - 1)) {
-                for (float r = 0; r < 256; r += 255.f / (depth - 1)) {
+        for (float b = 0; b < 256; b += 255.f / (ldDepth - 1)) {
+            for (float g = 0; g < 256; g += 255.f / (ldDepth - 1)) {
+                for (float r = 0; r < 256; r += 255.f / (ldDepth - 1)) {
                     colors.emplace_back(b, g, r);
                 }
             }
         }
-        Palette palette("Limited Depth = " + std::to_string(depth) + " ", colors);
+        Palette palette("Limited Depth " + std::to_string(ldDepth) + " ", colors);
 
         process(&palette, &dither, FS, B1, B2, ND, SHOW, imageName);
     }
 
+    if (HT) {
+        Mat halftone = dither.halftone(htDepth);
+        if (SHOW) imshow("Halftone Image", halftone);
+        imwrite(outputImagePrefix + imageName + " Halftone " + std::to_string(htDepth) + ".png", halftone);
+    }
 
     if (SHOW) imshow("Original Image", image);
 
     Mat grayscaleImage = imread(imagePath, IMREAD_GRAYSCALE);
     if (SHOW) imshow("Grayscale Image", grayscaleImage);
-    imwrite(outputImagePrefix + imageName + " Grayscale.png", grayscaleImage);
 
     if (SHOW) waitKey(0);
 

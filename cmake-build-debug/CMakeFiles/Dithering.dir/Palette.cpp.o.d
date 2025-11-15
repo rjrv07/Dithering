@@ -899,7 +899,6 @@ CMakeFiles/Dithering.dir/Palette.cpp.o: \
   /opt/homebrew/Cellar/opencv/4.12.0_14/include/opencv4/opencv2/core/saturate.hpp \
   /opt/homebrew/Cellar/opencv/4.12.0_14/include/opencv4/opencv2/core/fast_math.hpp \
   /opt/homebrew/Cellar/opencv/4.12.0_14/include/opencv4/opencv2/core/matx.inl.hpp \
-  /Users/roelie/Developer/Dithering/Utilities.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX26.1.sdk/usr/include/c++/v1/sstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX26.1.sdk/usr/include/c++/v1/__ostream/basic_ostream.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX26.1.sdk/usr/include/c++/v1/__ostream/put_character_sequence.h \

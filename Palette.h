@@ -34,6 +34,8 @@ class Palette {
 
     static Vec3b hexToVec3b(const std::string &hex);
     static double colorDistance(const Vec3b &vec, const Vec3b &ret);
+    static Vec4f BGRtoCMYK(const Vec3b &color);
+    static Vec3b CMYKtoBGR(const Vec4f &color);
 };
 
 

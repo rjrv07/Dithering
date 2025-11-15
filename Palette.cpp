@@ -48,3 +48,26 @@ double Palette::colorDistance(const Vec3b &vec, const Vec3b &ret) {
     }
     return sqrt(sum);
 }
+
+Vec4f Palette::BGRtoCMYK(const Vec3b &color) {
+    Vec4f cmyk;
+    float b = color[0] / 255.f, g = color[1] / 255.f, r = color[2] / 255.f;
+    cmyk[3] = 1 - max(max(b, g), r);
+    cmyk[0] = (1 - r - cmyk[3]) / (1 - cmyk[3]);
+    cmyk[1] = (1 - g - cmyk[3]) / (1 - cmyk[3]);
+    cmyk[2] = (1 - b - cmyk[3]) / (1 - cmyk[3]);
+    return cmyk;
+}
+
+Vec3b Palette::CMYKtoBGR(const Vec4f &color) {
+    Vec3b bgr;
+    float c = color[0] * (1 - color[3]) + color[3];
+    float m = color[1] * (1 - color[3]) + color[3];
+    float y = color[2] * (1 - color[3]) + color[3];
+
+    float r = (1 - c) * 255;
+    float g = (1 - m) * 255;
+    float b = (1 - y) * 255;
+    bgr[0] = b; bgr[1] = g; bgr[2] = r;
+    return bgr;
+}

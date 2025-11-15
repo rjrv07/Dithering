@@ -95,3 +95,53 @@ Mat Ditherer::noDither(Palette* palette) const {
     }
     return newImg;
 }
+
+Mat Ditherer::halftone(const int detail) const {
+    std::vector<std::vector<float>> threshold;
+    std::vector<int> rowOffsets, colOffsets;
+    switch (detail) {
+        case 1:
+            threshold = {
+                {12, 4, 11, 15},
+                {5, 0, 3, 10},
+                {6, 1, 2, 9},
+                {13, 7, 8, 14},
+            };
+            rowOffsets = {0, 1, 2, 0};
+            colOffsets = {2, 1, 0, 0};
+            break;
+        case 2:
+            threshold = {
+                {60, 52, 51, 50, 49, 48, 59, 63},
+                {53, 32, 16, 31, 30, 29, 47, 58},
+                {33, 17, 12, 4, 11, 15, 28, 46},
+                {34, 18, 5, 0, 3, 10, 27, 45},
+                {35, 19, 6, 1, 2, 9, 26, 44},
+                {36, 20, 13, 7, 8, 14, 25, 43},
+                {54, 37, 21, 22, 23, 24, 42, 57},
+                {61, 55, 38, 39, 40, 41, 56, 62}
+            };
+            rowOffsets = {0, 2, 4, 0};
+            colOffsets = {4, 2, 0, 0};
+            break;
+    }
+    for (auto &i: threshold) {
+        for (float &j: i) {
+            j /= threshold.size() * threshold[0].size();
+        }
+    }
+
+    Mat newImg = image->clone();
+    for (int i = 0; i < image->rows; i++) {
+        for (int j = 0; j < image->cols; j++) {
+            Vec4f color = Palette::BGRtoCMYK(newImg.at<Vec3b>(i, j));
+            for (int c = 0; c < 4; c++) {
+                if (color[c] > threshold[(i + rowOffsets[c]) % threshold.size()][(j + colOffsets[c]) % threshold.size()])
+                    color[c] = 1;
+                else color[c] = 0;
+            }
+            newImg.at<Vec3b>(i, j) = Palette::CMYKtoBGR(color);
+        }
+    }
+    return newImg;
+}
