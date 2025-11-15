@@ -22,6 +22,7 @@ class Ditherer {
     [[nodiscard]] Mat beyer(Palette* palette, int detail) const;
     [[nodiscard]] Mat noDither(Palette* palette) const;
     [[nodiscard]] Mat halftone(int detail) const;
+    [[nodiscard]] Mat gammaCorrect() const;
 };
 
 

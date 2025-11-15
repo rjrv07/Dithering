@@ -145,3 +145,19 @@ Mat Ditherer::halftone(const int detail) const {
     }
     return newImg;
 }
+
+Mat Ditherer::gammaCorrect() const {
+    Mat newImg = image->clone();
+    for (int i = 0; i < image->rows; i++) {
+        for (int j = 0; j < image->cols; j++) {
+            for (int c = 0; c < 3; c++) {
+                float val = newImg.at<Vec3b>(i, j)[c];
+                val /= 255;
+                val *= val;
+                val *= 255;
+                newImg.at<Vec3b>(i, j)[c] = saturate_cast<uchar>(val);
+            }
+        }
+    }
+    return newImg;
+}

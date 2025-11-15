@@ -124,7 +124,9 @@ int main() {
     }
 
     if (HT) {
-        Mat halftone = dither.halftone(htDepth);
+        Mat corrected = dither.gammaCorrect();
+        Ditherer cDither(&corrected);
+        Mat halftone = cDither.halftone(htDepth);
         if (SHOW) imshow("Halftone Image", halftone);
         imwrite(outputImagePrefix + imageName + " Halftone " + std::to_string(htDepth) + ".png", halftone);
     }
