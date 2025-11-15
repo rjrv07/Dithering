@@ -10,8 +10,6 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 add_executable(Dithering main.cpp
         Palette.cpp
         Palette.h
-        Utilities.cpp
-        Utilities.h
         Ditherer.cpp
         Ditherer.h)
 

@@ -31,6 +31,9 @@ class Palette {
     [[nodiscard]] std::string getName() const {
         return name;
     }
+
+    static Vec3b hexToVec3b(const std::string &hex);
+    static double colorDistance(const Vec3b &vec, const Vec3b &ret);
 };
 
 
