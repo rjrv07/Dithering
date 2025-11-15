@@ -15,25 +15,25 @@ constexpr std::string palettePrefix = "../palettes/";
 
 void process(Palette* palette, Ditherer* dither, bool FS, bool B1, bool B2, bool ND, bool SHOW, const std::string& imageName) {
     if (FS) {
-        Mat fsDithered = dither->floydSteinberg();
+        Mat fsDithered = dither->floydSteinberg(palette);
         if (SHOW) imshow("Floyd Steinberg: " + palette->getName(), fsDithered);
         imwrite(outputImagePrefix + imageName + " FS " + palette->getName() + ".png", fsDithered);
     }
 
     if (B1) {
-        Mat b1Dithered = dither->beyer(1);
+        Mat b1Dithered = dither->beyer(palette, 1);
         if (SHOW) imshow("Beyer 1: " + palette->getName(), b1Dithered);
         imwrite(outputImagePrefix + imageName + " B1 " + palette->getName() + ".png", b1Dithered);
     }
 
     if (B2) {
-        Mat b2Dithered = dither->beyer(2);
+        Mat b2Dithered = dither->beyer(palette, 2);
         if (SHOW) imshow("Beyer 2: " + palette->getName(), b2Dithered);
         imwrite(outputImagePrefix + imageName + " B2 " + palette->getName() + ".png", b2Dithered);
     }
 
     if (ND) {
-        Mat noDithered = dither->noDither();
+        Mat noDithered = dither->noDither(palette);
         if (SHOW) imshow("No Dither: " + palette->getName(), noDithered);
         imwrite(outputImagePrefix + imageName + " ND " + palette->getName() + ".png", noDithered);
     }
@@ -50,6 +50,7 @@ int main() {
         std::cout << "Could not read the image: " << imagePath << std::endl;
         return 1;
     }
+    Ditherer dither(&image);
 
     std::cout << "Palette collection: ";
     std::string paletteName;
@@ -95,7 +96,6 @@ int main() {
         getline(fin, line);
 
         Palette palette(name, line);
-        Ditherer dither(&palette, &image);
 
         process(&palette, &dither, FS, B1, B2, ND, SHOW, name);
     }
@@ -110,7 +110,6 @@ int main() {
             }
         }
         Palette palette("Limited Depth = " + std::to_string(depth) + " ", colors);
-        Ditherer dither(&palette, &image);
 
         process(&palette, &dither, FS, B1, B2, ND, SHOW, imageName);
     }

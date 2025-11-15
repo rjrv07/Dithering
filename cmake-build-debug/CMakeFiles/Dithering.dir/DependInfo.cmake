@@ -10,7 +10,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/roelie/Developer/Dithering/Ditherer.cpp" "CMakeFiles/Dithering.dir/Ditherer.cpp.o" "gcc" "CMakeFiles/Dithering.dir/Ditherer.cpp.o.d"
   "/Users/roelie/Developer/Dithering/Palette.cpp" "CMakeFiles/Dithering.dir/Palette.cpp.o" "gcc" "CMakeFiles/Dithering.dir/Palette.cpp.o.d"
-  "/Users/roelie/Developer/Dithering/Utilities.cpp" "CMakeFiles/Dithering.dir/Utilities.cpp.o" "gcc" "CMakeFiles/Dithering.dir/Utilities.cpp.o.d"
   "/Users/roelie/Developer/Dithering/main.cpp" "CMakeFiles/Dithering.dir/main.cpp.o" "gcc" "CMakeFiles/Dithering.dir/main.cpp.o.d"
   )
 

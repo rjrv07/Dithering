@@ -4,7 +4,7 @@
 
 #include "Ditherer.h"
 
-Mat Ditherer::floydSteinberg() const {
+Mat Ditherer::floydSteinberg(Palette* palette) const {
     Mat newImg = image->clone();
     for (int i = 0; i < image->rows; i++) {
         for (int j = 0; j < image->cols; j++) {
@@ -41,7 +41,7 @@ Mat Ditherer::floydSteinberg() const {
     return newImg;
 }
 
-Mat Ditherer::beyer(const int detail) const {
+Mat Ditherer::beyer(Palette* palette, const int detail) const {
     std::vector<std::vector<int> > threshold;
     switch (detail) {
         case 1:
@@ -86,7 +86,7 @@ Mat Ditherer::beyer(const int detail) const {
     return newImg;
 }
 
-Mat Ditherer::noDither() const {
+Mat Ditherer::noDither(Palette* palette) const {
     Mat newImg = image->clone();
     for (int i = 0; i < image->rows; i++) {
         for (int j = 0; j < image->cols; j++) {

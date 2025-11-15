@@ -3,8 +3,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/Dithering.dir/Ditherer.cpp.o.d"
   "CMakeFiles/Dithering.dir/Palette.cpp.o"
   "CMakeFiles/Dithering.dir/Palette.cpp.o.d"
-  "CMakeFiles/Dithering.dir/Utilities.cpp.o"
-  "CMakeFiles/Dithering.dir/Utilities.cpp.o.d"
   "CMakeFiles/Dithering.dir/main.cpp.o"
   "CMakeFiles/Dithering.dir/main.cpp.o.d"
   "Dithering"

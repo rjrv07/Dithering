@@ -11,18 +11,16 @@
 using namespace cv;
 
 class Ditherer {
-    Palette* palette;
     Mat* image;
 
     public:
-    Ditherer(Palette *palette, Mat *image) {
-        this->palette = palette;
+    Ditherer(Mat *image) {
         this->image = image;
     }
 
-    [[nodiscard]] Mat floydSteinberg() const;
-    [[nodiscard]] Mat beyer(int detail) const;
-    [[nodiscard]] Mat noDither() const;
+    [[nodiscard]] Mat floydSteinberg(Palette* palette) const;
+    [[nodiscard]] Mat beyer(Palette* palette, int detail) const;
+    [[nodiscard]] Mat noDither(Palette* palette) const;
 };
 
 

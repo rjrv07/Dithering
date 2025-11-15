@@ -177,30 +177,6 @@ Palette.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dithering.dir/build.make CMakeFiles/Dithering.dir/Palette.cpp.s
 .PHONY : Palette.cpp.s
 
-Utilities.o: Utilities.cpp.o
-.PHONY : Utilities.o
-
-# target to build an object file
-Utilities.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dithering.dir/build.make CMakeFiles/Dithering.dir/Utilities.cpp.o
-.PHONY : Utilities.cpp.o
-
-Utilities.i: Utilities.cpp.i
-.PHONY : Utilities.i
-
-# target to preprocess a source file
-Utilities.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dithering.dir/build.make CMakeFiles/Dithering.dir/Utilities.cpp.i
-.PHONY : Utilities.cpp.i
-
-Utilities.s: Utilities.cpp.s
-.PHONY : Utilities.s
-
-# target to generate assembly for a file
-Utilities.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dithering.dir/build.make CMakeFiles/Dithering.dir/Utilities.cpp.s
-.PHONY : Utilities.cpp.s
-
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -240,9 +216,6 @@ help:
 	@echo "... Palette.o"
 	@echo "... Palette.i"
 	@echo "... Palette.s"
-	@echo "... Utilities.o"
-	@echo "... Utilities.i"
-	@echo "... Utilities.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -85,12 +85,12 @@ clean: CMakeFiles/Dithering.dir/clean
 CMakeFiles/Dithering.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dithering.dir/build.make CMakeFiles/Dithering.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dithering.dir/build.make CMakeFiles/Dithering.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/roelie/Developer/Dithering/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5 "Built target Dithering"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/roelie/Developer/Dithering/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Built target Dithering"
 .PHONY : CMakeFiles/Dithering.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Dithering.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/roelie/Developer/Dithering/cmake-build-debug/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/roelie/Developer/Dithering/cmake-build-debug/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Dithering.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/roelie/Developer/Dithering/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/Dithering.dir/rule
@@ -102,7 +102,7 @@ Dithering: CMakeFiles/Dithering.dir/rule
 # codegen rule for target.
 CMakeFiles/Dithering.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Dithering.dir/build.make CMakeFiles/Dithering.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/roelie/Developer/Dithering/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5 "Finished codegen for target Dithering"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/roelie/Developer/Dithering/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Finished codegen for target Dithering"
 .PHONY : CMakeFiles/Dithering.dir/codegen
 
 # clean rule for target.
