@@ -106,7 +106,7 @@ int main() {
 
         Palette palette(name, line);
 
-        process(&palette, &dither, FS, B1, B2, ND, SHOW, name);
+        process(&palette, &dither, FS, B1, B2, ND, SHOW, imageName);
     }
 
     if (LD) {
