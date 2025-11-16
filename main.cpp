@@ -118,7 +118,7 @@ int main() {
                 }
             }
         }
-        Palette palette("Limited Depth " + std::to_string(ldDepth) + " ", colors);
+        Palette palette("Limited Depth " + std::to_string(ldDepth), colors);
 
         process(&palette, &dither, FS, B1, B2, ND, SHOW, imageName);
     }
