@@ -1,6 +1,8 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 
+#include "Ditherer.h"
+
 using namespace cv;
 
 constexpr std::string inputVideoPrefix = "../input_videos/";
@@ -30,6 +32,9 @@ int main() {
 
     Mat frame;
     while (cap.read(frame)) {
+        frame = Ditherer::gammaCorrect(frame);
+        frame = Ditherer::halftone(frame, 2);
+
         // Write the frame to the output video file
         out.write(frame);
 
