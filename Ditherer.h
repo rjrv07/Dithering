@@ -11,18 +11,11 @@
 using namespace cv;
 
 class Ditherer {
-    Mat* image;
-
-    public:
-    Ditherer(Mat *image) {
-        this->image = image;
-    }
-
-    [[nodiscard]] Mat floydSteinberg(Palette* palette) const;
-    [[nodiscard]] Mat beyer(Palette* palette, int detail) const;
-    [[nodiscard]] Mat noDither(Palette* palette) const;
-    [[nodiscard]] Mat halftone(int detail) const;
-    [[nodiscard]] Mat gammaCorrect() const;
+    static Mat floydSteinberg(Mat& image, Palette& palette);
+    static Mat beyer(Mat& image, Palette& palette, int detail);
+    static Mat noDither(Mat& image, Palette& palette);
+    static Mat halftone(Mat& image, int detail);
+    static Mat gammaCorrect(Mat& image);
 };
 
 

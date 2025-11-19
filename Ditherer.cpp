@@ -4,12 +4,12 @@
 
 #include "Ditherer.h"
 
-Mat Ditherer::floydSteinberg(Palette* palette) const {
-    Mat newImg = image->clone();
-    for (int i = 0; i < image->rows; i++) {
-        for (int j = 0; j < image->cols; j++) {
+Mat Ditherer::floydSteinberg(Mat& image, Palette& palette) {
+    Mat newImg = image.clone();
+    for (int i = 0; i < image.rows; i++) {
+        for (int j = 0; j < image.cols; j++) {
             auto oldCol = newImg.at<Vec3b>(i, j);
-            newImg.at<Vec3b>(i, j) = palette->getNearestColor(newImg.at<Vec3b>(i, j));
+            newImg.at<Vec3b>(i, j) = palette.getNearestColor(newImg.at<Vec3b>(i, j));
 
             Vec3f err(
                 (float) oldCol[0] - (float) newImg.at<Vec3b>(i, j)[0],
@@ -24,15 +24,15 @@ Mat Ditherer::floydSteinberg(Palette* palette) const {
                 }
             };
 
-            if (j + 1 < image->cols) {
+            if (j + 1 < image.cols) {
                 addError(i, j + 1, 7.f / 16.f);
             }
-            if (i + 1 < image->rows) {
+            if (i + 1 < image.rows) {
                 if (j > 0) {
                     addError(i + 1, j - 1, 3.f / 16.f);
                 }
                 addError(i + 1, j, 5.f / 16.f);
-                if (j + 1 < image->cols) {
+                if (j + 1 < image.cols) {
                     addError(i + 1, j + 1, 1.f / 16.f);
                 }
             }
@@ -41,7 +41,7 @@ Mat Ditherer::floydSteinberg(Palette* palette) const {
     return newImg;
 }
 
-Mat Ditherer::beyer(Palette* palette, const int detail) const {
+Mat Ditherer::beyer(Mat& image, Palette& palette, const int detail) {
     std::vector<std::vector<int> > threshold;
     switch (detail) {
         case 1:
@@ -72,31 +72,31 @@ Mat Ditherer::beyer(Palette* palette, const int detail) const {
             break;
     }
 
-    Mat newImg = image->clone();
-    for (int i = 0; i < image->rows; i++) {
-        for (int j = 0; j < image->cols; j++) {
+    Mat newImg = image.clone();
+    for (int i = 0; i < image.rows; i++) {
+        for (int j = 0; j < image.cols; j++) {
             for (int c = 0; c < 3; c++) {
                 int val = (int) newImg.at<Vec3b>(i, j)[c] + threshold[i % (1 << detail)][j % (1 << detail)];
                 newImg.at<Vec3b>(i, j)[c] = saturate_cast<uchar>(val);
             }
 
-            newImg.at<Vec3b>(i, j) = palette->getNearestColor(newImg.at<Vec3b>(i, j));
+            newImg.at<Vec3b>(i, j) = palette.getNearestColor(newImg.at<Vec3b>(i, j));
         }
     }
     return newImg;
 }
 
-Mat Ditherer::noDither(Palette* palette) const {
-    Mat newImg = image->clone();
-    for (int i = 0; i < image->rows; i++) {
-        for (int j = 0; j < image->cols; j++) {
-            newImg.at<Vec3b>(i, j) = palette->getNearestColor(newImg.at<Vec3b>(i, j));
+Mat Ditherer::noDither(Mat& image, Palette& palette) {
+    Mat newImg = image.clone();
+    for (int i = 0; i < image.rows; i++) {
+        for (int j = 0; j < image.cols; j++) {
+            newImg.at<Vec3b>(i, j) = palette.getNearestColor(newImg.at<Vec3b>(i, j));
         }
     }
     return newImg;
 }
 
-Mat Ditherer::halftone(const int detail) const {
+Mat Ditherer::halftone(Mat& image, const int detail) {
     std::vector<std::vector<float>> threshold;
     std::vector<int> rowOffsets, colOffsets;
     switch (detail) {
@@ -131,9 +131,9 @@ Mat Ditherer::halftone(const int detail) const {
         }
     }
 
-    Mat newImg = image->clone();
-    for (int i = 0; i < image->rows; i++) {
-        for (int j = 0; j < image->cols; j++) {
+    Mat newImg = image.clone();
+    for (int i = 0; i < image.rows; i++) {
+        for (int j = 0; j < image.cols; j++) {
             Vec4f color = Palette::BGRtoCMYK(newImg.at<Vec3b>(i, j));
             for (int c = 0; c < 4; c++) {
                 if (color[c] > threshold[(i + rowOffsets[c]) % threshold.size()][(j + colOffsets[c]) % threshold.size()])
@@ -146,10 +146,10 @@ Mat Ditherer::halftone(const int detail) const {
     return newImg;
 }
 
-Mat Ditherer::gammaCorrect() const {
-    Mat newImg = image->clone();
-    for (int i = 0; i < image->rows; i++) {
-        for (int j = 0; j < image->cols; j++) {
+Mat Ditherer::gammaCorrect(Mat& image) {
+    Mat newImg = image.clone();
+    for (int i = 0; i < image.rows; i++) {
+        for (int j = 0; j < image.cols; j++) {
             for (int c = 0; c < 3; c++) {
                 float val = newImg.at<Vec3b>(i, j)[c];
                 val /= 255;
