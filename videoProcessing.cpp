@@ -10,8 +10,11 @@ constexpr std::string outputVideoPrefix = "../output_videos/";
 constexpr std::string palettePrefix = "../palettes/";
 
 int main() {
+    std::string videoName;
+    std::cout << "Enter video name: ";
+    std::cin >> videoName;
     // Open the video file
-    VideoCapture cap(".mp4");
+    VideoCapture cap(inputVideoPrefix + videoName + ".mp4");
 
     // Check if the video was opened successfully
     if (!cap.isOpened()) {
@@ -24,7 +27,7 @@ int main() {
     int frame_height = static_cast<int>(cap.get(CAP_PROP_FRAME_HEIGHT));
 
     // Define the codec and create VideoWriter object
-    VideoWriter out("output.avi",
+    VideoWriter out(inputVideoPrefix + videoName + " processed.mp4",
         VideoWriter::fourcc('m', 'p', '4', 'v'),
     cap.get(CAP_PROP_FPS),
         Size(frame_width, frame_height)
