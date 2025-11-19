@@ -7,10 +7,17 @@ find_package(OpenCV REQUIRED)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-add_executable(Dithering main.cpp
+add_executable(ImageProcessing imageProcessing.cpp
         Palette.cpp
         Palette.h
         Ditherer.cpp
         Ditherer.h)
 
-target_link_libraries(Dithering ${OpenCV_LIBS})
+add_executable(VideoProcessing videoProcessing.cpp
+        Palette.cpp
+        Palette.h
+        Ditherer.cpp
+        Ditherer.h)
+
+target_link_libraries(ImageProcessing ${OpenCV_LIBS})
+target_link_libraries(VideoProcessing ${OpenCV_LIBS})
