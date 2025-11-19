@@ -11,6 +11,7 @@
 using namespace cv;
 
 class Ditherer {
+    public:
     static Mat floydSteinberg(Mat& image, Palette& palette);
     static Mat beyer(Mat& image, Palette& palette, int detail);
     static Mat noDither(Mat& image, Palette& palette);
